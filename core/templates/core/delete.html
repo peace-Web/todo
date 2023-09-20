@@ -1,0 +1,14 @@
+{% extends 'core/main.html' %}
+
+{% block content %}
+<div class="container">
+    <p>Are you sure you wanna delete <span style="color: green; font-weight:bold;">{{task.task_title}}</span></p>
+
+<form action="{% url 'delete' task.id %}" method="post">
+    {% csrf_token %}
+    <a href="{% url 'home' %}">Cancel</a>
+    
+    <input type="submit" value="confirm">
+</form>
+</div>
+{% endblock content %}

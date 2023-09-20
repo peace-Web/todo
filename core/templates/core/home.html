@@ -1,0 +1,55 @@
+{% extends 'core/main.html' %}
+
+{% block content %}
+
+
+
+<div class="container mt-3">
+    
+    <form action="/" method="POST">
+        {% csrf_token %}
+        <div class="mb-3">
+            {{form.task_title}}
+          <input type="submit" value="add task">
+          </div>
+          
+    </form>
+      
+      
+    <table class="table">
+        <thead>
+          <tr>
+            
+            <th scope="col">Title</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
+            <th scope="col">Time</th>
+            <th scope="col">Completed</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+            {% if task %}
+            {% for x in task %}
+          <tr>
+            
+            <td>{{x.task_title}}</td>
+            <td><a href="{% url 'edit' x.id %}">Edit</a></td>
+            <td><a href="{% url 'delete' x.id %}">Delete</a></td>
+            <td>{{x.create_at}}</td>
+            {% if x.completed %}
+            <td>Yes</td>
+            {% else %}
+            <td>Non</td>
+            {% endif %}
+          </tr>
+         {% endfor %}
+         {% else %}
+          <h3>No Tasks Yet</h3>
+          {% endif %}
+        </tbody>
+      </table>
+</div>
+
+
+{% endblock content %}
